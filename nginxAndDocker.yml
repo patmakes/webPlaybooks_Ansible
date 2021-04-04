@@ -1,0 +1,16 @@
+---
+  - name: install nginx & docker
+    hosts: webservers
+    become: true
+    tasks:
+    - name: Install nginx & docker (state=present is optional)
+      apt:
+          name: nginx, docker.io
+          state: present
+    - name: enable docker on boot
+      systemd:
+        name: docker
+        enabled: yes
+    - name: enable nginx on boot
+      systemd:
+        name: nginx
